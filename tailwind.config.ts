@@ -47,15 +47,20 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        sidebar: {
-          DEFAULT: "hsl(var(--sidebar-background))",
-          foreground: "hsl(var(--sidebar-foreground))",
-          primary: "hsl(var(--sidebar-primary))",
-          "primary-foreground": "hsl(var(--sidebar-primary-foreground))",
-          accent: "hsl(var(--sidebar-accent))",
-          "accent-foreground": "hsl(var(--sidebar-accent-foreground))",
-          border: "hsl(var(--sidebar-border))",
-          ring: "hsl(var(--sidebar-ring))",
+        extension: {
+          sidebar: "hsl(var(--extension-sidebar))",
+          tab: "hsl(var(--extension-tab))",
+          "tab-active": "hsl(var(--extension-tab-active))",
+          hover: "hsl(var(--extension-hover))",
+          selected: "hsl(var(--extension-selected))",
+        },
+        component: {
+          card: "hsl(var(--component-card))",
+          hover: "hsl(var(--component-hover))",
+        },
+        tree: {
+          indent: "hsl(var(--tree-indent))",
+          hover: "hsl(var(--tree-hover))",
         },
       },
       borderRadius: {
