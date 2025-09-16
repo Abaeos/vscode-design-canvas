@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Settings } from "lucide-react";
+import { Settings, Play } from "lucide-react";
 import { TabNavigation } from "./TabNavigation";
 import { ComponentsPanel } from "./panels/ComponentsPanel";
 import { PagesPanel } from "./panels/PagesPanel";
@@ -40,11 +40,18 @@ export const VSCodeExtension = () => {
         {renderActivePanel()}
       </div>
       
-      {/* Settings Button */}
-      <div className="border-t border-border p-2">
+      {/* Action Buttons */}
+      <div className="border-t border-border p-2 flex gap-2">
+        <button
+          onClick={() => console.log('Start preview')}
+          className="flex-1 p-2 rounded extension-tab flex items-center justify-center group"
+          title="Start Preview"
+        >
+          <Play className="h-4 w-4 group-hover:scale-110 transition-transform duration-200" />
+        </button>
         <button
           onClick={() => setShowSettings(!showSettings)}
-          className="w-full p-2 rounded extension-tab flex items-center justify-center group"
+          className="flex-1 p-2 rounded extension-tab flex items-center justify-center group"
           title="Extension Settings"
         >
           <Settings className="h-4 w-4 group-hover:rotate-45 transition-transform duration-200" />
