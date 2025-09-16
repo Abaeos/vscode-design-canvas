@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Search, Plus } from "lucide-react";
+import { Search, Plus, ArrowUpDown } from "lucide-react";
 import { ViewModeToggle, ViewMode } from "../ViewModeToggle";
 import { ComponentCard } from "../ComponentCard";
 
@@ -14,14 +14,30 @@ const sampleComponents = [
   { id: "8", name: "Avatar", category: "Display", description: "User avatar" },
 ];
 
+type SortOption = "name-asc" | "name-desc" | "category";
+
 export const ComponentsPanel = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [viewMode, setViewMode] = useState<ViewMode>("cards");
+  const [sortOption, setSortOption] = useState<SortOption>("name-asc");
   
-  const filteredComponents = sampleComponents.filter(component =>
-    component.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    component.category.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredComponents = sampleComponents
+    .filter(component =>
+      component.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      component.category.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+    .sort((a, b) => {
+      switch (sortOption) {
+        case "name-asc":
+          return a.name.localeCompare(b.name);
+        case "name-desc":
+          return b.name.localeCompare(a.name);
+        case "category":
+          return a.category.localeCompare(b.category);
+        default:
+          return 0;
+      }
+    });
 
   return (
     <div className="flex flex-col h-full">
@@ -42,9 +58,20 @@ export const ComponentsPanel = () => {
         
         {/* View Mode Toggle */}
         <div className="flex items-center justify-between">
-          <span className="text-xs text-muted-foreground">
-            {filteredComponents.length} components
-          </span>
+          <div className="flex items-center gap-2">
+            <span className="text-xs text-muted-foreground">
+              {filteredComponents.length} components
+            </span>
+            <select
+              value={sortOption}
+              onChange={(e) => setSortOption(e.target.value as SortOption)}
+              className="text-xs bg-transparent border-none outline-none text-muted-foreground"
+            >
+              <option value="name-asc">A-Z</option>
+              <option value="name-desc">Z-A</option>
+              <option value="category">Category</option>
+            </select>
+          </div>
           <ViewModeToggle mode={viewMode} onModeChange={setViewMode} />
         </div>
       </div>

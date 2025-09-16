@@ -6,15 +6,33 @@ const samplePages = [
   { id: "2", name: "About", path: "/about", status: "draft", icon: FileText },
   { id: "3", name: "Contact", path: "/contact", status: "published", icon: Users },
   { id: "4", name: "Settings", path: "/settings", status: "draft", icon: Settings },
+  { id: "5", name: "Privacy", path: "/privacy", status: "published", icon: FileText },
+  { id: "6", name: "Blog", path: "/blog", status: "published", icon: FileText },
 ];
+
+type SortOption = "name-asc" | "name-desc" | "status";
 
 export const PagesPanel = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [sortOption, setSortOption] = useState<SortOption>("name-asc");
   
-  const filteredPages = samplePages.filter(page =>
-    page.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    page.path.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredPages = samplePages
+    .filter(page =>
+      page.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      page.path.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+    .sort((a, b) => {
+      switch (sortOption) {
+        case "name-asc":
+          return a.name.localeCompare(b.name);
+        case "name-desc":
+          return b.name.localeCompare(a.name);
+        case "status":
+          return a.status.localeCompare(b.status);
+        default:
+          return 0;
+      }
+    });
 
   return (
     <div className="flex flex-col h-full">
@@ -32,8 +50,24 @@ export const PagesPanel = () => {
           />
         </div>
         
-        <div className="text-xs text-muted-foreground">
-          {filteredPages.length} pages
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <span className="text-xs text-muted-foreground">
+              {filteredPages.length} pages
+            </span>
+            <select
+              value={sortOption}
+              onChange={(e) => setSortOption(e.target.value as SortOption)}
+              className="text-xs bg-transparent border-none outline-none text-muted-foreground"
+            >
+              <option value="name-asc">A-Z</option>
+              <option value="name-desc">Z-A</option>
+              <option value="status">Status</option>
+            </select>
+          </div>
+          <button className="text-xs text-muted-foreground hover:text-foreground">
+            <Plus className="h-3 w-3" />
+          </button>
         </div>
       </div>
 

@@ -20,30 +20,6 @@ export const SettingsPanel = ({ onClose }: SettingsPanelProps) => {
 
       {/* Settings Content */}
       <div className="flex-1 overflow-y-auto p-3 space-y-4">
-        {/* Theme Section */}
-        <div>
-          <h4 className="text-xs font-medium mb-2 flex items-center gap-2">
-            <Palette className="h-3 w-3" />
-            Theme
-          </h4>
-          <div className="space-y-2">
-            <label className="flex items-center gap-2 text-sm cursor-pointer">
-              <input type="radio" name="theme" value="auto" defaultChecked className="w-3 h-3" />
-              <Monitor className="h-3 w-3" />
-              Auto
-            </label>
-            <label className="flex items-center gap-2 text-sm cursor-pointer">
-              <input type="radio" name="theme" value="light" className="w-3 h-3" />
-              <Sun className="h-3 w-3" />
-              Light
-            </label>
-            <label className="flex items-center gap-2 text-sm cursor-pointer">
-              <input type="radio" name="theme" value="dark" className="w-3 h-3" />
-              <Moon className="h-3 w-3" />
-              Dark
-            </label>
-          </div>
-        </div>
 
         {/* Editor Section */}
         <div>

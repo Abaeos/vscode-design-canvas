@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ChevronRight, ChevronDown, Eye, EyeOff, Lock, Unlock } from "lucide-react";
+import { ChevronRight, ChevronDown, Eye, EyeOff, Lock, Unlock, Square, Image, Code, Type, Layout, Columns, FileText } from "lucide-react";
 
 interface LayerNode {
   id: string;
@@ -9,6 +9,36 @@ interface LayerNode {
   isVisible: boolean;
   isLocked: boolean;
 }
+
+const getElementIcon = (type: string) => {
+  switch (type) {
+    case "div":
+    case "body":
+      return Square;
+    case "img":
+      return Image;
+    case "code":
+      return Code;
+    case "section":
+      return Layout;
+    case "header":
+    case "footer":
+    case "nav":
+      return Layout;
+    case "main":
+      return FileText;
+    case "h1":
+    case "h2":
+    case "h3":
+    case "p":
+    case "span":
+      return Type;
+    case "container":
+      return Columns;
+    default:
+      return Square;
+  }
+};
 
 const sampleLayers: LayerNode[] = [
   {
@@ -92,6 +122,10 @@ export const LayersPanel = () => {
 
           {/* Layer Info */}
           <div className="flex-1 flex items-center gap-2 min-w-0 ml-1">
+            {(() => {
+              const Icon = getElementIcon(node.type);
+              return <Icon className="h-3 w-3 text-muted-foreground" />;
+            })()}
             <span className="text-sm truncate">{node.name}</span>
             <span className="text-xs text-muted-foreground opacity-60">{node.type}</span>
           </div>
