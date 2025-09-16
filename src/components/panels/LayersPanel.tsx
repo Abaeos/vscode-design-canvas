@@ -75,7 +75,11 @@ const sampleLayers: LayerNode[] = [
   },
 ];
 
-export const LayersPanel = () => {
+interface LayersPanelProps {
+  onElementSelect?: (element: any) => void;
+}
+
+export const LayersPanel = ({ onElementSelect }: LayersPanelProps) => {
   const [expandedNodes, setExpandedNodes] = useState<Set<string>>(new Set(["1", "2", "5"]));
   const [selectedNode, setSelectedNode] = useState<string>("6");
 
@@ -101,7 +105,10 @@ export const LayersPanel = () => {
             isSelected ? "bg-[hsl(var(--extension-selected))]" : ""
           }`}
           style={{ paddingLeft: `${depth * 16 + 8}px` }}
-          onClick={() => setSelectedNode(node.id)}
+          onClick={() => {
+            setSelectedNode(node.id);
+            onElementSelect?.(node);
+          }}
         >
           {/* Expand/Collapse Button */}
           <button

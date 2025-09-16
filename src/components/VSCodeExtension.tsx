@@ -9,7 +9,11 @@ import { SettingsPanel } from "./panels/SettingsPanel";
 
 export type TabType = "components" | "pages" | "assets" | "layers";
 
-export const VSCodeExtension = () => {
+interface VSCodeExtensionProps {
+  onElementSelect?: (element: any) => void;
+}
+
+export const VSCodeExtension = ({ onElementSelect }: VSCodeExtensionProps) => {
   const [activeTab, setActiveTab] = useState<TabType>("components");
   const [showSettings, setShowSettings] = useState(false);
 
@@ -24,7 +28,7 @@ export const VSCodeExtension = () => {
       case "assets":
         return <AssetsPanel />;
       case "layers":
-        return <LayersPanel />;
+        return <LayersPanel onElementSelect={onElementSelect} />;
       default:
         return <ComponentsPanel />;
     }
