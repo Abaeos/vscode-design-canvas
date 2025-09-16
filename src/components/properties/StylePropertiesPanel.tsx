@@ -122,45 +122,70 @@ export const StylePropertiesPanel = ({ element }: StylePropertiesPanelProps) => 
 
       {/* Spacing */}
       <PropertySection title="Spacing" section="spacing">
-        <div>
-          <div className="text-xs font-medium text-foreground mb-2 text-center bg-muted/30 py-1 rounded">Margin</div>
-          <div className="grid grid-cols-4 gap-2 mb-4">
-            <div>
-              <Label className="text-xs font-medium text-foreground mb-1 block">Top</Label>
-              <Input placeholder="0" className="h-8 bg-muted/50 border-input text-xs" />
-            </div>
-            <div>
-              <Label className="text-xs font-medium text-foreground mb-1 block">Right</Label>
-              <Input placeholder="0" className="h-8 bg-muted/50 border-input text-xs" />
-            </div>
-            <div>
-              <Label className="text-xs font-medium text-foreground mb-1 block">Bottom</Label>
-              <Input placeholder="0" className="h-8 bg-muted/50 border-input text-xs" />
-            </div>
-            <div>
-              <Label className="text-xs font-medium text-foreground mb-1 block">Left</Label>
-              <Input placeholder="0" className="h-8 bg-muted/50 border-input text-xs" />
-            </div>
-          </div>
-        </div>
-        <div>
-          <div className="text-xs font-medium text-foreground mb-2 text-center bg-muted/30 py-1 rounded">Padding</div>
-          <div className="grid grid-cols-4 gap-2">
-            <div>
-              <Label className="text-xs font-medium text-foreground mb-1 block">Top</Label>
-              <Input placeholder="0" className="h-8 bg-muted/50 border-input text-xs" />
-            </div>
-            <div>
-              <Label className="text-xs font-medium text-foreground mb-1 block">Right</Label>
-              <Input placeholder="0" className="h-8 bg-muted/50 border-input text-xs" />
-            </div>
-            <div>
-              <Label className="text-xs font-medium text-foreground mb-1 block">Bottom</Label>
-              <Input placeholder="0" className="h-8 bg-muted/50 border-input text-xs" />
-            </div>
-            <div>
-              <Label className="text-xs font-medium text-foreground mb-1 block">Left</Label>
-              <Input placeholder="0" className="h-8 bg-muted/50 border-input text-xs" />
+        <div className="space-y-4">
+          {/* Visual Box Model */}
+          <div className="relative bg-muted/20 border border-border rounded-lg p-4">
+            {/* Margin (outer) */}
+            <div className="relative border-2 border-dashed border-orange-300 bg-orange-50/50 dark:bg-orange-900/20 rounded p-3">
+              <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-background border border-border rounded px-1">
+                <span className="text-xs text-orange-600 dark:text-orange-400 font-medium">margin</span>
+              </div>
+              
+              {/* Margin input fields */}
+              <input 
+                placeholder="0" 
+                className="absolute -top-2 left-1/2 transform -translate-x-1/2 w-12 h-6 text-xs text-center bg-background border border-input rounded px-1 focus:ring-1 focus:ring-ring"
+                title="Margin Top"
+              />
+              <input 
+                placeholder="0" 
+                className="absolute top-1/2 -right-2 transform -translate-y-1/2 w-12 h-6 text-xs text-center bg-background border border-input rounded px-1 focus:ring-1 focus:ring-ring"
+                title="Margin Right"
+              />
+              <input 
+                placeholder="0" 
+                className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-12 h-6 text-xs text-center bg-background border border-input rounded px-1 focus:ring-1 focus:ring-ring"
+                title="Margin Bottom"
+              />
+              <input 
+                placeholder="0" 
+                className="absolute top-1/2 -left-2 transform -translate-y-1/2 w-12 h-6 text-xs text-center bg-background border border-input rounded px-1 focus:ring-1 focus:ring-ring"
+                title="Margin Left"
+              />
+
+              {/* Padding (inner) */}
+              <div className="relative border-2 border-dashed border-green-300 bg-green-50/50 dark:bg-green-900/20 rounded p-3">
+                <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-background border border-border rounded px-1">
+                  <span className="text-xs text-green-600 dark:text-green-400 font-medium">padding</span>
+                </div>
+                
+                {/* Padding input fields */}
+                <input 
+                  placeholder="0" 
+                  className="absolute -top-2 left-1/2 transform -translate-x-1/2 w-12 h-6 text-xs text-center bg-background border border-input rounded px-1 focus:ring-1 focus:ring-ring"
+                  title="Padding Top"
+                />
+                <input 
+                  placeholder="0" 
+                  className="absolute top-1/2 -right-2 transform -translate-y-1/2 w-12 h-6 text-xs text-center bg-background border border-input rounded px-1 focus:ring-1 focus:ring-ring"
+                  title="Padding Right"
+                />
+                <input 
+                  placeholder="0" 
+                  className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-12 h-6 text-xs text-center bg-background border border-input rounded px-1 focus:ring-1 focus:ring-ring"
+                  title="Padding Bottom"
+                />
+                <input 
+                  placeholder="0" 
+                  className="absolute top-1/2 -left-2 transform -translate-y-1/2 w-12 h-6 text-xs text-center bg-background border border-input rounded px-1 focus:ring-1 focus:ring-ring"
+                  title="Padding Left"
+                />
+
+                {/* Content area */}
+                <div className="bg-blue-50/50 dark:bg-blue-900/20 border border-blue-300 rounded p-6 flex items-center justify-center">
+                  <span className="text-xs text-blue-600 dark:text-blue-400 font-medium">content</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
