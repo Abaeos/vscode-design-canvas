@@ -123,67 +123,53 @@ export const StylePropertiesPanel = ({ element }: StylePropertiesPanelProps) => 
       {/* Spacing */}
       <PropertySection title="Spacing" section="spacing">
         <div className="space-y-4">
-          {/* Visual Box Model */}
-          <div className="relative bg-muted/20 border border-border rounded-lg p-4">
-            {/* Margin (outer) */}
-            <div className="relative border-2 border-dashed border-orange-300 bg-orange-50/50 dark:bg-orange-900/20 rounded p-3">
-              <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-background border border-border rounded px-1">
-                <span className="text-xs text-orange-600 dark:text-orange-400 font-medium">margin</span>
+          {/* Box Model Visualization */}
+          <div className="bg-muted/10 border border-border rounded-lg p-4">
+            {/* Margin container */}
+            <div className="bg-amber-50/50 dark:bg-amber-900/10 border border-amber-200 dark:border-amber-800 rounded-lg p-3 relative">
+              <div className="absolute -top-2 left-2 bg-background px-2 py-0.5 rounded text-xs font-medium text-amber-600 dark:text-amber-400">
+                Margin
               </div>
               
-              {/* Margin input fields */}
-              <input 
-                placeholder="0" 
-                className="absolute -top-2 left-1/2 transform -translate-x-1/2 w-12 h-6 text-xs text-center bg-background border border-input rounded px-1 focus:ring-1 focus:ring-ring"
-                title="Margin Top"
-              />
-              <input 
-                placeholder="0" 
-                className="absolute top-1/2 -right-2 transform -translate-y-1/2 w-12 h-6 text-xs text-center bg-background border border-input rounded px-1 focus:ring-1 focus:ring-ring"
-                title="Margin Right"
-              />
-              <input 
-                placeholder="0" 
-                className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-12 h-6 text-xs text-center bg-background border border-input rounded px-1 focus:ring-1 focus:ring-ring"
-                title="Margin Bottom"
-              />
-              <input 
-                placeholder="0" 
-                className="absolute top-1/2 -left-2 transform -translate-y-1/2 w-12 h-6 text-xs text-center bg-background border border-input rounded px-1 focus:ring-1 focus:ring-ring"
-                title="Margin Left"
-              />
-
-              {/* Padding (inner) */}
-              <div className="relative border-2 border-dashed border-green-300 bg-green-50/50 dark:bg-green-900/20 rounded p-3">
-                <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-background border border-border rounded px-1">
-                  <span className="text-xs text-green-600 dark:text-green-400 font-medium">padding</span>
+              {/* Margin inputs */}
+              <div className="space-y-2">
+                <div className="flex justify-center">
+                  <Input placeholder="0" className="w-16 h-7 text-xs text-center bg-background" title="Margin Top" />
                 </div>
-                
-                {/* Padding input fields */}
-                <input 
-                  placeholder="0" 
-                  className="absolute -top-2 left-1/2 transform -translate-x-1/2 w-12 h-6 text-xs text-center bg-background border border-input rounded px-1 focus:ring-1 focus:ring-ring"
-                  title="Padding Top"
-                />
-                <input 
-                  placeholder="0" 
-                  className="absolute top-1/2 -right-2 transform -translate-y-1/2 w-12 h-6 text-xs text-center bg-background border border-input rounded px-1 focus:ring-1 focus:ring-ring"
-                  title="Padding Right"
-                />
-                <input 
-                  placeholder="0" 
-                  className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-12 h-6 text-xs text-center bg-background border border-input rounded px-1 focus:ring-1 focus:ring-ring"
-                  title="Padding Bottom"
-                />
-                <input 
-                  placeholder="0" 
-                  className="absolute top-1/2 -left-2 transform -translate-y-1/2 w-12 h-6 text-xs text-center bg-background border border-input rounded px-1 focus:ring-1 focus:ring-ring"
-                  title="Padding Left"
-                />
-
-                {/* Content area */}
-                <div className="bg-blue-50/50 dark:bg-blue-900/20 border border-blue-300 rounded p-6 flex items-center justify-center">
-                  <span className="text-xs text-blue-600 dark:text-blue-400 font-medium">content</span>
+                <div className="flex justify-between items-center">
+                  <Input placeholder="0" className="w-16 h-7 text-xs text-center bg-background" title="Margin Left" />
+                  
+                  {/* Padding container */}
+                  <div className="bg-emerald-50/50 dark:bg-emerald-900/10 border border-emerald-200 dark:border-emerald-800 rounded-lg p-3 relative flex-1 mx-2">
+                    <div className="absolute -top-2 left-2 bg-background px-2 py-0.5 rounded text-xs font-medium text-emerald-600 dark:text-emerald-400">
+                      Padding
+                    </div>
+                    
+                    {/* Padding inputs */}
+                    <div className="space-y-2">
+                      <div className="flex justify-center">
+                        <Input placeholder="0" className="w-16 h-7 text-xs text-center bg-background" title="Padding Top" />
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <Input placeholder="0" className="w-16 h-7 text-xs text-center bg-background" title="Padding Left" />
+                        
+                        {/* Content area */}
+                        <div className="bg-blue-50/50 dark:bg-blue-900/10 border border-blue-200 dark:border-blue-800 rounded px-4 py-3 flex-1 mx-2">
+                          <div className="text-xs text-center text-blue-600 dark:text-blue-400 font-medium">Element</div>
+                        </div>
+                        
+                        <Input placeholder="0" className="w-16 h-7 text-xs text-center bg-background" title="Padding Right" />
+                      </div>
+                      <div className="flex justify-center">
+                        <Input placeholder="0" className="w-16 h-7 text-xs text-center bg-background" title="Padding Bottom" />
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <Input placeholder="0" className="w-16 h-7 text-xs text-center bg-background" title="Margin Right" />
+                </div>
+                <div className="flex justify-center">
+                  <Input placeholder="0" className="w-16 h-7 text-xs text-center bg-background" title="Margin Bottom" />
                 </div>
               </div>
             </div>

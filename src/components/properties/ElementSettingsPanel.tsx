@@ -35,23 +35,27 @@ export const ElementSettingsPanel = ({ element }: ElementSettingsPanelProps) => 
     children: React.ReactNode;
     icon?: any;
   }) => (
-    <Collapsible open={openSections[section]} onOpenChange={() => toggleSection(section)}>
-      <CollapsibleTrigger className="w-full p-3 hover:bg-accent/50 transition-colors">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            {Icon && <Icon className="h-4 w-4" />}
-            <span className="text-sm font-medium">{title}</span>
+    <div className="border-b border-border/30">
+      <Collapsible open={openSections[section]} onOpenChange={() => toggleSection(section)}>
+        <CollapsibleTrigger className="w-full p-4 hover:bg-accent/30 transition-colors group">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              {Icon && <Icon className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />}
+              <span className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">{title}</span>
+            </div>
+            {openSections[section] ? 
+              <ChevronDown className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" /> : 
+              <ChevronRight className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
+            }
           </div>
-          {openSections[section] ? 
-            <ChevronDown className="h-4 w-4" /> : 
-            <ChevronRight className="h-4 w-4" />
-          }
-        </div>
-      </CollapsibleTrigger>
-      <CollapsibleContent className="px-3 pb-3">
-        {children}
-      </CollapsibleContent>
-    </Collapsible>
+        </CollapsibleTrigger>
+        <CollapsibleContent className="px-4 pb-4">
+          <div className="space-y-3">
+            {children}
+          </div>
+        </CollapsibleContent>
+      </Collapsible>
+    </div>
   );
 
   // Dynamic content based on element type
@@ -62,43 +66,41 @@ export const ElementSettingsPanel = ({ element }: ElementSettingsPanelProps) => 
       case 'img':
         return (
           <PropertySection title="Image Settings" section="elementProps" icon={Image}>
-            <div className="space-y-3">
+            <div>
+              <Label className="text-xs font-medium text-foreground mb-2 block">Source (src)</Label>
+              <Input placeholder="https://example.com/image.jpg" className="h-9 bg-muted/50 border-input" />
+            </div>
+            <div>
+              <Label className="text-xs font-medium text-foreground mb-2 block">Alt Text</Label>
+              <Input placeholder="Image description" className="h-9 bg-muted/50 border-input" />
+            </div>
+            <div className="grid grid-cols-2 gap-3">
               <div>
-                <Label className="text-xs text-muted-foreground">Source (src)</Label>
-                <Input placeholder="https://example.com/image.jpg" className="h-8 mt-1" />
-              </div>
-              <div>
-                <Label className="text-xs text-muted-foreground">Alt Text</Label>
-                <Input placeholder="Image description" className="h-8 mt-1" />
-              </div>
-              <div className="grid grid-cols-2 gap-2">
-                <div>
-                  <Label className="text-xs text-muted-foreground">Width</Label>
-                  <Input placeholder="auto" className="h-8 mt-1" />
-                </div>
-                <div>
-                  <Label className="text-xs text-muted-foreground">Height</Label>
-                  <Input placeholder="auto" className="h-8 mt-1" />
-                </div>
+                <Label className="text-xs font-medium text-foreground mb-2 block">Width</Label>
+                <Input placeholder="auto" className="h-9 bg-muted/50 border-input" />
               </div>
               <div>
-                <Label className="text-xs text-muted-foreground">Object Fit</Label>
-                <Select defaultValue="cover">
-                  <SelectTrigger className="h-8 mt-1">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="cover">Cover</SelectItem>
-                    <SelectItem value="contain">Contain</SelectItem>
-                    <SelectItem value="fill">Fill</SelectItem>
-                    <SelectItem value="none">None</SelectItem>
-                  </SelectContent>
-                </Select>
+                <Label className="text-xs font-medium text-foreground mb-2 block">Height</Label>
+                <Input placeholder="auto" className="h-9 bg-muted/50 border-input" />
               </div>
-              <div className="flex items-center space-x-2">
-                <Checkbox id="lazy-load" />
-                <Label htmlFor="lazy-load" className="text-xs">Lazy Loading</Label>
-              </div>
+            </div>
+            <div>
+              <Label className="text-xs font-medium text-foreground mb-2 block">Object Fit</Label>
+              <Select defaultValue="cover">
+                <SelectTrigger className="h-9 bg-muted/50 border-input">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="cover">Cover</SelectItem>
+                  <SelectItem value="contain">Contain</SelectItem>
+                  <SelectItem value="fill">Fill</SelectItem>
+                  <SelectItem value="none">None</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="flex items-center space-x-2">
+              <Checkbox id="lazy-load" />
+              <Label htmlFor="lazy-load" className="text-xs font-medium text-foreground">Lazy Loading</Label>
             </div>
           </PropertySection>
         );
@@ -209,31 +211,29 @@ export const ElementSettingsPanel = ({ element }: ElementSettingsPanelProps) => 
   };
 
   return (
-    <div className="space-y-1">
+    <div className="h-full overflow-y-auto">
       {/* Visibility */}
       <PropertySection title="Visibility" section="visibility">
-        <div className="space-y-3">
-          <div>
-            <Label className="text-xs text-muted-foreground">Visibility</Label>
-            <Select defaultValue="visible">
-              <SelectTrigger className="h-8 mt-1">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="visible">Visible</SelectItem>
-                <SelectItem value="hidden">Hidden</SelectItem>
-                <SelectItem value="collapse">Collapse</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-          <div>
-            <Label className="text-xs text-muted-foreground">Opacity</Label>
-            <Input placeholder="1" className="h-8 mt-1" />
-          </div>
-          <div className="flex items-center space-x-2">
-            <Checkbox id="pointer-events" defaultChecked />
-            <Label htmlFor="pointer-events" className="text-xs">Enable Pointer Events</Label>
-          </div>
+        <div>
+          <Label className="text-xs font-medium text-foreground mb-2 block">Visibility</Label>
+          <Select defaultValue="visible">
+            <SelectTrigger className="h-9 bg-muted/50 border-input">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="visible">Visible</SelectItem>
+              <SelectItem value="hidden">Hidden</SelectItem>
+              <SelectItem value="collapse">Collapse</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+        <div>
+          <Label className="text-xs font-medium text-foreground mb-2 block">Opacity</Label>
+          <Input placeholder="1" className="h-9 bg-muted/50 border-input" />
+        </div>
+        <div className="flex items-center space-x-2">
+          <Checkbox id="pointer-events" defaultChecked />
+          <Label htmlFor="pointer-events" className="text-xs font-medium text-foreground">Enable Pointer Events</Label>
         </div>
       </PropertySection>
 
@@ -242,73 +242,67 @@ export const ElementSettingsPanel = ({ element }: ElementSettingsPanelProps) => 
 
       {/* Accessibility */}
       <PropertySection title="Accessibility" section="accessibility">
-        <div className="space-y-3">
-          <div>
-            <Label className="text-xs text-muted-foreground">ARIA Label</Label>
-            <Input placeholder="Descriptive label" className="h-8 mt-1" />
-          </div>
-          <div>
-            <Label className="text-xs text-muted-foreground">ARIA Role</Label>
-            <Select>
-              <SelectTrigger className="h-8 mt-1">
-                <SelectValue placeholder="Select role" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="button">Button</SelectItem>
-                <SelectItem value="link">Link</SelectItem>
-                <SelectItem value="heading">Heading</SelectItem>
-                <SelectItem value="banner">Banner</SelectItem>
-                <SelectItem value="main">Main</SelectItem>
-                <SelectItem value="navigation">Navigation</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-          <div>
-            <Label className="text-xs text-muted-foreground">Tab Index</Label>
-            <Input placeholder="0" className="h-8 mt-1" />
-          </div>
+        <div>
+          <Label className="text-xs font-medium text-foreground mb-2 block">ARIA Label</Label>
+          <Input placeholder="Descriptive label" className="h-9 bg-muted/50 border-input" />
+        </div>
+        <div>
+          <Label className="text-xs font-medium text-foreground mb-2 block">ARIA Role</Label>
+          <Select>
+            <SelectTrigger className="h-9 bg-muted/50 border-input">
+              <SelectValue placeholder="Select role" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="button">Button</SelectItem>
+              <SelectItem value="link">Link</SelectItem>
+              <SelectItem value="heading">Heading</SelectItem>
+              <SelectItem value="banner">Banner</SelectItem>
+              <SelectItem value="main">Main</SelectItem>
+              <SelectItem value="navigation">Navigation</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+        <div>
+          <Label className="text-xs font-medium text-foreground mb-2 block">Tab Index</Label>
+          <Input placeholder="0" className="h-9 bg-muted/50 border-input" />
         </div>
       </PropertySection>
 
       {/* Interactions */}
       <PropertySection title="Interactions" section="interactions">
-        <div className="space-y-3">
-          <div>
-            <Label className="text-xs text-muted-foreground">onClick Handler</Label>
-            <Input placeholder="handleClick" className="h-8 mt-1" />
-          </div>
-          <div>
-            <Label className="text-xs text-muted-foreground">onHover Handler</Label>
-            <Input placeholder="handleHover" className="h-8 mt-1" />
-          </div>
-          <div>
-            <Label className="text-xs text-muted-foreground">Link (href)</Label>
-            <Input placeholder="/path-or-url" className="h-8 mt-1" />
-          </div>
-          <div className="flex items-center space-x-2">
-            <Checkbox id="external-link" />
-            <Label htmlFor="external-link" className="text-xs">Open in New Tab</Label>
-          </div>
+        <div>
+          <Label className="text-xs font-medium text-foreground mb-2 block">onClick Handler</Label>
+          <Input placeholder="handleClick" className="h-9 bg-muted/50 border-input font-mono text-xs" />
+        </div>
+        <div>
+          <Label className="text-xs font-medium text-foreground mb-2 block">onHover Handler</Label>
+          <Input placeholder="handleHover" className="h-9 bg-muted/50 border-input font-mono text-xs" />
+        </div>
+        <div>
+          <Label className="text-xs font-medium text-foreground mb-2 block">Link (href)</Label>
+          <Input placeholder="/path-or-url" className="h-9 bg-muted/50 border-input" />
+        </div>
+        <div className="flex items-center space-x-2">
+          <Checkbox id="external-link" />
+          <Label htmlFor="external-link" className="text-xs font-medium text-foreground">Open in New Tab</Label>
         </div>
       </PropertySection>
 
       {/* Custom Attributes */}
       <PropertySection title="Custom Attributes" section="customAttributes">
-        <div className="space-y-3">
-          <div>
-            <Label className="text-xs text-muted-foreground">Data Attributes</Label>
-            <Textarea 
-              placeholder={`data-testid="component-name"\ndata-analytics="button-click"`}
-              className="min-h-[60px] mt-1 font-mono text-xs"
-            />
-          </div>
-          <div>
-            <Label className="text-xs text-muted-foreground">Custom Props</Label>
-            <Textarea 
-              placeholder={`customProp="value"\nanotherProp={true}`}
-              className="min-h-[60px] mt-1 font-mono text-xs"
-            />
-          </div>
+        <div>
+          <Label className="text-xs font-medium text-foreground mb-2 block">Data Attributes</Label>
+          <Textarea 
+            placeholder={`data-testid="component-name"\ndata-analytics="button-click"`}
+            className="bg-muted/50 border-input min-h-[60px] font-mono text-xs"
+          />
+        </div>
+        <div>
+          <Label className="text-xs font-medium text-foreground mb-2 block">Custom Props</Label>
+          <Textarea 
+            placeholder={`customProp="value"\nanotherProp={true}`}
+            className="bg-muted/50 border-input min-h-[60px] font-mono text-xs"
+          />
         </div>
       </PropertySection>
     </div>
