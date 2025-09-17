@@ -45,7 +45,7 @@ export const PropertiesPanel = ({ selectedElement }: PropertiesPanelProps) => {
           <Tabs defaultValue="styles" className="h-full flex flex-col">
             <TabsList className="grid w-full grid-cols-2 m-2">
               <TabsTrigger value="styles" className="text-xs">Styles</TabsTrigger>
-              <TabsTrigger value="settings" className="text-xs">Settings</TabsTrigger>
+              <TabsTrigger value="settings" className="text-xs">Properties</TabsTrigger>
             </TabsList>
             
             <TabsContent value="styles" className="flex-1 overflow-y-auto m-0">
